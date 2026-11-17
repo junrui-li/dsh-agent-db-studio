@@ -56,7 +56,7 @@ const MODEL_FALLBACK_MAX_CANDIDATES = 3
 /** 自动回退时每个 provider 最多取几个模型候选。 */
 const MODEL_FALLBACK_MODELS_PER_PROVIDER = 2
 
-const SOURCE_KIND = 'dsh-db-studio'
+const SOURCE_KIND = 'dsh-agent-db-studio'
 
 /**
  * 脱敏字段分析的模型提示词（契约 §3.7 Host 侧）。

@@ -8,7 +8,7 @@
     // （退化为另存/下载）。Chromium 支持把句柄结构化克隆进 IndexedDB——跨会话恢复句柄，
     // 保存时 queryPermission/requestPermission（按钮点击手势内）直接写回原文件；
     // 不支持的环境（老内核/隐私模式/Node 测试）全部静默回退到原「另存/下载」链路。
-    const FILE_HANDLE_DB = 'dsh-db-studio-files'
+    const FILE_HANDLE_DB = 'dsh-agent-db-studio-files'
     const FILE_HANDLE_STORE = 'sql-file-handles'
     function openFileHandleDb() {
       return new Promise(resolve => {

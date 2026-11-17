@@ -81,8 +81,8 @@ export function registerBrowserRoute(ctx, { settings, supervisor, backend, name 
   // 语义层 AI 蒸馏（第 51 轮）：同一条诊断日志、同一套模型解析与降级。
   const distill = createDistillBridge(ctx, { backend, dataDir: settings.dataDir })
   // 插件卸载/热重载时把进行中的模型调用 abort 掉，别让旧 fiber 的调用挂在新路由上。
-  ctx.effect(() => () => ai.dispose(), 'dsh-db-studio: abort in-flight AI calls')
-  ctx.effect(() => () => distill.dispose(), 'dsh-db-studio: abort in-flight distill calls')
+  ctx.effect(() => () => ai.dispose(), 'dsh-agent-db-studio: abort in-flight AI calls')
+  ctx.effect(() => () => distill.dispose(), 'dsh-agent-db-studio: abort in-flight distill calls')
 
   async function pluginHealth(res, method) {
     const status = supervisor.status()
@@ -216,5 +216,5 @@ export function registerBrowserRoute(ctx, { settings, supervisor, backend, name 
         json(res, status, { error: error instanceof Error ? error.message : String(error) })
       }
     },
-  }), 'dsh-db-studio: /db-studio routes')
+  }), 'dsh-agent-db-studio: /db-studio routes')
 }

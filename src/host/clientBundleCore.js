@@ -11,7 +11,7 @@
 
 export const CLIENT_HEADER = [
   'window.__ModuleLoader__.load({',
-  "  id: 'dsh-db-studio',",
+  "  id: 'dsh-agent-db-studio',",
   '  factory(require) {',
   "    const React = require('react')",
   '    const h = React.createElement',

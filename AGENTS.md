@@ -1,6 +1,6 @@
 # AGENTS.md — 仓库导航（给人 / 给 AI）
 
-DSH 插件 `dsh-db-studio`：把数据库管理接进 DeepSeek Harness（agent 用工具接管数据管理，人在 Web UI 面板里看得见、管得住）。
+DSH 插件 `dsh-agent-db-studio`：把数据库管理接进 DeepSeek Harness（agent 用工具接管数据管理，人在 Web UI 面板里看得见、管得住）。
 **V3**：数据库引擎在 Host 进程内运行（`src/host/server/`），无子进程、无端口；契约（`docs/CONTRACT.md`）是唯一权威。
 
 ## 目录地图（先看这里，别乱翻）

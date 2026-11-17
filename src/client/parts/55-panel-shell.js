@@ -3,7 +3,7 @@
     // 5.5 面板外壳：宽度测量 / 窄布局 / 连接与元数据显隐偏好
     // ======================================================================
 
-    const LAYOUT_STORAGE_KEY = 'dsh-db-studio:layout'
+    const LAYOUT_STORAGE_KEY = 'dsh-agent-db-studio:layout'
     /** 面板宽度小于该值时视为窄布局（连接与元数据默认收起）。 */
     const NARROW_WIDTH = 720
     /** 测不到面板宽度时的窗口兜底值（SSR / 无 window 环境）。 */

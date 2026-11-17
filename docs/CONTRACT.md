@@ -1,4 +1,4 @@
-# dsh-db-studio 接口契约 v1
+# dsh-agent-db-studio 接口契约 v1
 
 > 这份文件是接口与行为的唯一权威：改动必须先改这里，再改实现。
 
@@ -797,10 +797,10 @@ AI 行要显示真实解析结果（可用 / 自动回退及原因 / 不可用�
 Client 半片 `plugin.inject = ['slots', 'layout', 'sidebarRight', 'sidebarRightTabs']`。
 
 **注册**（`C0-register.js`，全部放 `ctx.effect` 内，卸载时统一回收）：
-- tab 类型：`ctx.sidebarRightTabs.register({ id: 'dsh-db-studio', kind: 'db-studio', title: () => '数据管理', guide: [{ id: 'open', order: 30, title, description, icon }] })`。
+- tab 类型：`ctx.sidebarRightTabs.register({ id: 'dsh-agent-db-studio', kind: 'db-studio', title: () => '数据管理', guide: [{ id: 'open', order: 30, title, description, icon }] })`。
   **不设 `multiple`**（同一会话同一 pane 只有一个数据管理 tab）、**不设 `priority`**（默认 `extension` band，第三方插件的正确 band）；
   `id` 全局唯一，且就是下面两个槽的 key。
-- body / title：`sidebar.right.pane.tab` 与 `sidebar.right.pane.tab.title` 两个 **keyed** 槽，key=`dsh-db-studio`；
+- body / title：`sidebar.right.pane.tab` 与 `sidebar.right.pane.tab.title` 两个 **keyed** 槽，key=`dsh-agent-db-studio`；
   body 渲染同一个 `Panel`（`mode='sidebar'`），title 渲染图标 + 「数据管理」。
 - guide 卡片由内置 guide 页渲染（`icon` 以 `{size,className}` 渲染）；点击卡片即内部执行 `tab.actions.openTab('db-studio', { replaceTab: true })`。
 
@@ -823,7 +823,7 @@ Client 半片 `plugin.inject = ['slots', 'layout', 'sidebarRight', 'sidebarRight
 - 左栏（连接 + 元数据）显隐：工具栏**一个**开关（`data-dbs-testid="toggle-side"`，文案「连接与元数据」）——
   第 50 轮把原来的 `toggle-connections` / `toggle-meta` 两个按钮合并成一个，二者不再分别开合。
   **默认（用户没手动设置过）跟随宽度**：narrow → 收起，宽 → 展开；用户点过开关后写
-  `localStorage['dsh-db-studio:layout'] = {"showSide":boolean}` 记住显式选择，之后拉宽不会自动恢复（显式优先）。
+  `localStorage['dsh-agent-db-studio:layout'] = {"showSide":boolean}` 记住显式选择，之后拉宽不会自动恢复（显式优先）。
   旧版 `{"showConnections","showMeta"}` 只做**读取兼容**（任一为 true 即视为展开），下次写入即迁移成 `{showSide}`。
 - 左栏内部分区固定 **3:7**：连接区 `.dbs-conn-section` 占 30%、元数据区 `.dbs-tree-section` 占 70%
   （`flex: 3 1 0` / `flex: 7 1 0`）。连接行数超出时在 `.dbs-conn-list` 内独立纵向滚动（`overflow-y:auto`），

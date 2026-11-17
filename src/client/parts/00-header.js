@@ -1,5 +1,5 @@
 /**
- * dsh-db-studio —— Client 半片：Web UI「数据管理」主面板
+ * dsh-agent-db-studio —— Client 半片：Web UI「数据管理」主面板
  *
  * ⚠️ 本文件（以及 src/client/index.js）是由 src/client/parts/*.js 拼接生成的运行时单文件，
  *    **不要直接改 index.js**——改对应的 part，然后运行：node scripts/build-client.mjs

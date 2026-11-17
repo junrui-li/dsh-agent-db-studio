@@ -925,7 +925,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
   register({
     name: 'db_status',
     description:
-      'Report the dsh-db-studio plugin state: whether the built-in engine is ready, how many database '
+      'Report the dsh-agent-db-studio plugin state: whether the built-in engine is ready, how many database '
       + 'connections are configured, and whether write tools are enabled. It also reports the business semantic '
       + 'layer status (whether any domain exists / index readiness); the 4 NL2SQL tools are always registered, so '
       + '"no domains yet" means the user has to create one in the panel, not that the tools are off. Call this first '
@@ -1100,7 +1100,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
         aiError: ai.error ?? '',
       }
     },
-  }, 'dsh-db-studio: db_status tool')
+  }, 'dsh-agent-db-studio: db_status tool')
 
   // -------------------------------------------------------------- 2. db_list_connections
 
@@ -1149,7 +1149,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
       })
       return { count: connections.length, connections }
     },
-  }, 'dsh-db-studio: db_list_connections tool')
+  }, 'dsh-agent-db-studio: db_list_connections tool')
 
   // -------------------------------------------------------------- 3. db_list_databases
 
@@ -1182,7 +1182,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
       const databases = Array.isArray(body.databases) ? body.databases : []
       return { connectionId: args.connectionId, count: databases.length, databases }
     },
-  }, 'dsh-db-studio: db_list_databases tool')
+  }, 'dsh-agent-db-studio: db_list_databases tool')
 
   // -------------------------------------------------------------- 4. db_list_tables
 
@@ -1222,7 +1222,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
       const tables = Array.isArray(body.tables) ? body.tables : []
       return { connectionId: args.connectionId, database: args.database, count: tables.length, tables }
     },
-  }, 'dsh-db-studio: db_list_tables tool')
+  }, 'dsh-agent-db-studio: db_list_tables tool')
 
   // -------------------------------------------------------------- 5. db_describe_table
 
@@ -1301,7 +1301,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
       }
       return value
     },
-  }, 'dsh-db-studio: db_describe_table tool')
+  }, 'dsh-agent-db-studio: db_describe_table tool')
 
   // -------------------------------------------------------------- 6. db_query
 
@@ -1361,7 +1361,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
         results: normalizeResults(body.results),
       }
     },
-  }, 'dsh-db-studio: db_query tool')
+  }, 'dsh-agent-db-studio: db_query tool')
 
   // -------------------------------------------------------------- 7. db_execute
   //
@@ -1372,7 +1372,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
     settings.writeMode === 'direct'
       ? buildDirectExecuteDefinition(ctx, { settings, backend })
       : buildTicketExecuteDefinition({ settings, backend }),
-    'dsh-db-studio: db_execute tool',
+    'dsh-agent-db-studio: db_execute tool',
     writesVisible,
   )
 
@@ -1381,7 +1381,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
 
   register(
     buildUndoLastDefinition(ctx, { settings, backend }),
-    'dsh-db-studio: db_undo_last tool',
+    'dsh-agent-db-studio: db_undo_last tool',
     writesVisible,
   )
 
@@ -1390,7 +1390,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
 
   register(
     buildWriteRowsDefinition(ctx, { settings, backend }),
-    'dsh-db-studio: db_write_rows tool',
+    'dsh-agent-db-studio: db_write_rows tool',
     writesVisible,
   )
 
@@ -1466,7 +1466,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
         tickets,
       }
     },
-  }, 'dsh-db-studio: db_list_tickets tool')
+  }, 'dsh-agent-db-studio: db_list_tickets tool')
 
   // -------------------------------------------------------------- 9. db_get_ticket
 
@@ -1535,7 +1535,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
         throw new Error(`读取工单 ${id} 失败：${error instanceof Error ? error.message : String(error)}`)
       }
     },
-  }, 'dsh-db-studio: db_get_ticket tool')
+  }, 'dsh-agent-db-studio: db_get_ticket tool')
 
   // -------------------------------------------------------------- 9.5 db_export_query（第 45 轮）
 
@@ -1599,7 +1599,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
         title: String(ticket.title || ''),
       }
     },
-  }, 'dsh-db-studio: db_export_query tool')
+  }, 'dsh-agent-db-studio: db_export_query tool')
 
   // -------------------------------------------------------------- 10. db_list_history
 
@@ -1665,7 +1665,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
       const history = Array.isArray(body?.history) ? body.history : []
       return { count: history.length, history }
     },
-  }, 'dsh-db-studio: db_list_history tool')
+  }, 'dsh-agent-db-studio: db_list_history tool')
 
   // -------------------------------------------------------------- 11. db_redis_scan
 
@@ -1720,7 +1720,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
         keys,
       }
     },
-  }, 'dsh-db-studio: db_redis_scan tool')
+  }, 'dsh-agent-db-studio: db_redis_scan tool')
 
   // -------------------------------------------------------------- 12. db_redis_key
 
@@ -1777,7 +1777,7 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
       if (body.truncated === true) value.truncated = true
       return value
     },
-  }, 'dsh-db-studio: db_redis_key tool')
+  }, 'dsh-agent-db-studio: db_redis_key tool')
 
   // -------------------------------------------------------------- 13. db_redis_command
 
@@ -1836,5 +1836,5 @@ export function registerTools(ctx, { settings, backend, supervisor }) {
         reply: body.reply ?? null,
       }
     },
-  }, 'dsh-db-studio: db_redis_command tool', writesVisible)
+  }, 'dsh-agent-db-studio: db_redis_command tool', writesVisible)
 }

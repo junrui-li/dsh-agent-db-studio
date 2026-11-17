@@ -32,7 +32,7 @@ const DISTILL_MAX_SQL_CHARS = 4_000
 const DISTILL_MAX_QUESTION_CHARS = 200
 const DISTILL_MAX_NOTES_CHARS = 400
 
-const SOURCE_KIND = 'dsh-db-studio'
+const SOURCE_KIND = 'dsh-agent-db-studio'
 
 /**
  * 蒸馏的模型提示词：模型只做「挑 + 整理」，SQL 必须逐字取自输入候选。

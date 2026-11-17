@@ -6,7 +6,7 @@
 
     // 右栏 tab 类型的注册 id（同时是 body/title 两个 keyed 槽的 key）与 kind。
     // id 必须全局唯一，用包名最稳；kind 是打开 tab 时用的判别符。
-    const SIDEBAR_TAB_ID = 'dsh-db-studio'
+    const SIDEBAR_TAB_ID = 'dsh-agent-db-studio'
     const SIDEBAR_TAB_KIND = 'db-studio'
     // “切回会话 → 右侧栏 seat 挂载/adopt”是异步的，openTab 首次会同步抛错，
     // 用短轮询重试（上限约 2s），成功即停。
@@ -65,7 +65,7 @@
           }
           if (typeof console !== 'undefined' && console.warn) {
             const reason = error && error.message ? error.message : String(error)
-            console.warn('[dsh-db-studio] 无法在右侧边栏打开数据管理：' + reason)
+            console.warn('[dsh-agent-db-studio] 无法在右侧边栏打开数据管理：' + reason)
           }
         }
       }
@@ -85,7 +85,7 @@
                 ctx.layout.selectPanel(PANEL_KEY)
               } catch (error) {
                 if (typeof console !== 'undefined' && console.warn) {
-                  console.warn('[dsh-db-studio] 无法切回主面板：' + (error && error.message ? error.message : error))
+                  console.warn('[dsh-agent-db-studio] 无法切回主面板：' + (error && error.message ? error.message : error))
                 }
               }
             },
@@ -138,7 +138,7 @@
             if (typeof disposeTabType === 'function') disposeTabType()
             panelShell = null
           }
-        }, 'dsh-db-studio: 数据管理面板与左侧栏入口')
+        }, 'dsh-agent-db-studio: 数据管理面板与左侧栏入口')
 
         // 插件卸载时关掉自己打开的右栏 tab（无 seat/未 adopt 的会话是 no-op）。
         ctx.effect(() => () => {
@@ -156,6 +156,6 @@
           } catch (error) {
             // 右栏服务已拆或从未挂载：无需清理
           }
-        }, 'dsh-db-studio: 右侧边栏 tab 清理')
+        }, 'dsh-agent-db-studio: 右侧边栏 tab 清理')
       },
     }

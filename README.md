@@ -1,4 +1,4 @@
-# dsh-db-studio
+# dsh-agent-db-studio
 
 **DeepSeek Harness（DSH）插件：让 agent 接管数据管理**——查库、看表结构、跑 SQL、按审批改数据，都由 DSH 里的 agent 直接干；人在 Web UI 的「数据管理」面板里看得见、管得住。
 
@@ -41,7 +41,7 @@ V3 起数据库引擎**收编进 Host 进程**（Node 实现，`node:sqlite` 做
 - 左侧栏「数据管理」图标 → 整块中央面板；
 - 也可以从 **DSH 右侧边栏**打开：右栏 guide 页里的「数据管理」卡片，或主面板顶栏的「在侧栏打开」；右栏 tab 内点「在主面板打开」可切回中央面板。右栏 tab 与终端/文件/文档预览等并列，内容与主面板同源（同一套 `Panel` 组件，`mode='sidebar'` 紧凑布局）。
 
-**窄面板自动收起**：面板宽度 < 720px 或处于右侧边栏时，**连接管理与元数据树默认收起**；顶栏两个开关可随时展开（窄时为**覆盖式抽屉**，遮罩/× 关闭，不挤压主区）。用户点过开关后记住显式选择（`localStorage['dsh-db-studio:layout']`）；没手动设置过时跟随宽度自动默认。
+**窄面板自动收起**：面板宽度 < 720px 或处于右侧边栏时，**连接管理与元数据树默认收起**；顶栏两个开关可随时展开（窄时为**覆盖式抽屉**，遮罩/× 关闭，不挤压主区）。用户点过开关后记住显式选择（`localStorage['dsh-agent-db-studio:layout']`）；没手动设置过时跟随宽度自动默认。
 
 中央面板顶部五个视图：**工作区 / 工单 / 历史 / 脱敏策略 / 语义层**。
 
@@ -123,10 +123,10 @@ V3 起数据库引擎**收编进 Host 进程**（Node 实现，`node:sqlite` 做
 
 ```sh
 # 本地安装：在仓库的上级目录执行，或改为绝对路径
-dsh plugin --profile desktop add ./dsh-db-studio
+dsh plugin --profile desktop add ./dsh-agent-db-studio
 
 # 或从 git 仓库安装
-dsh plugin --profile desktop add git+https://github.com/junrui-li/dsh-db-studio.git
+dsh plugin --profile desktop add git+https://github.com/junrui-li/dsh-agent-db-studio.git
 
 # 或直接按 npm 包名安装
 dsh plugin --profile desktop add dsh-agent-db-studio
@@ -141,7 +141,7 @@ allowBuilds:
   dsh-agent-db-studio: true
 ```
 
-`prepare` 只是把 `src/client/parts/*.js` 拼成 `dist/client/index.js`；本地路径安装（`./dsh-db-studio`）不依赖它，插件激活时会自动按需重建，忘了 build 也不会静默跑旧代码。
+`prepare` 只是把 `src/client/parts/*.js` 拼成 `dist/client/index.js`；本地路径安装（`./dsh-agent-db-studio`）不依赖它，插件激活时会自动按需重建，忘了 build 也不会静默跑旧代码。
 
 - 数据目录默认 `<仓库>/server/data`（`dbs.db` / `semantic-index.db` / `undo/` / `exports/`）。**库里含明文连接密码，`.gitignore` 已排除 `server/data/` 与所有 `*.db`，绝不入库。**
 - 配置以 `cordis.patch.yml` 为准（插件没有设置页）：`allowWrites` / `writeMode` / `maxRows` / `timeout` / `undoMaxRows` / `undoKeep` / `semanticLayerPath` / `semanticMaxChars` / `semanticRefreshHours` / `semanticDistillHours`。改完用 `plugin_manager set_bundle` 关→开重载（**不要** `remove_bundle`+`install_bundle`，会触发依赖重装、可能殃及别的插件）。

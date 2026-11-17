@@ -164,7 +164,7 @@
     }
 
     // ---- 工作区编辑器/结果区分隔比例（第 34 轮：默认 6:4，localStorage 持久化） ----
-    const EDITOR_RATIO_STORAGE_KEY = 'dsh-db-studio:editor-ratio'
+    const EDITOR_RATIO_STORAGE_KEY = 'dsh-agent-db-studio:editor-ratio'
     const DEFAULT_EDITOR_RATIO = 0.6
     const MIN_EDITOR_PX = 280   // 编辑器区下限（含 wrap 内边距/foot，textarea 保底约 240px）
     const MIN_RESULTS_PX = 140
@@ -203,7 +203,7 @@
     // SQL 正文不放 queryTabs state（避免每个键击触发整树重渲染），运行时真值在 Panel 的
     // querySqlRef；持久化时从这里取。单条 SQL 超过 QUERY_SQL_STORAGE_LIMIT 时只存元数据，
     // 不截断落库（宁可下次打开丢草稿，也不恢复出被截断的 SQL）。
-    const QUERY_TABS_STORAGE_KEY = 'dsh-db-studio:query-tabs:v1'
+    const QUERY_TABS_STORAGE_KEY = 'dsh-agent-db-studio:query-tabs:v1'
     const QUERY_SQL_STORAGE_LIMIT = 200000
 
     function emptyQueryTabsCache() {

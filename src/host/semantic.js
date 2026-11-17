@@ -197,7 +197,7 @@ export function registerSemanticTools(ctx, { settings, backend }) {
       const body = await backend.getJson('/api/semantic/domains', {}, { signal: exec.signal, timeoutMs: SEMANTIC_TIMEOUT_MS })
       return normalizeDomainsBody(body)
     },
-  }, 'dsh-db-studio: db_list_semantic_domains tool')
+  }, 'dsh-agent-db-studio: db_list_semantic_domains tool')
 
   // ------------------------------------------------ 2. db_search_semantics
 
@@ -256,7 +256,7 @@ export function registerSemanticTools(ctx, { settings, backend }) {
       const body = await backend.getJson('/api/semantic/search', params, { signal: exec.signal, timeoutMs: SEMANTIC_TIMEOUT_MS })
       return normalizeHits(body)
     },
-  }, 'dsh-db-studio: db_search_semantics tool')
+  }, 'dsh-agent-db-studio: db_search_semantics tool')
 
   // ------------------------------------------------ 3. db_get_semantic_asset
 
@@ -327,7 +327,7 @@ export function registerSemanticTools(ctx, { settings, backend }) {
       const body = await backend.getJson('/api/semantic/asset', params, { signal: exec.signal, timeoutMs: SEMANTIC_TIMEOUT_MS })
       return normalizeAsset(body)
     },
-  }, 'dsh-db-studio: db_get_semantic_asset tool')
+  }, 'dsh-agent-db-studio: db_get_semantic_asset tool')
 
   // ------------------------------------------------ 4. db_get_table_card
 
@@ -390,5 +390,5 @@ export function registerSemanticTools(ctx, { settings, backend }) {
       const body = await backend.getJson('/api/semantic/table', params, { signal: exec.signal, timeoutMs: SEMANTIC_TIMEOUT_MS })
       return normalizeTableCard(body)
     },
-  }, 'dsh-db-studio: db_get_table_card tool')
+  }, 'dsh-agent-db-studio: db_get_table_card tool')
 }

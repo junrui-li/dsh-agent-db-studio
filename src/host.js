@@ -1,5 +1,5 @@
 /**
- * dsh-db-studio —— Host 半片（V3：后端收编进本进程，无 Python sidecar）。
+ * dsh-agent-db-studio —— Host 半片（V3：后端收编进本进程，无 Python sidecar）。
  *
  * 三件事：
  *   1. server/（src/host/server/）在本进程内实现全部后端路由（48 条；runtime.js 组装）；
@@ -18,7 +18,7 @@ import { NL2SQL_PROMPT_SECTION, NL2SQL_PROMPT_TEXT } from './host/nl2sql-prompt.
 import { registerSemanticTools } from './host/semantic.js'
 import { registerTools } from './host/tools.js'
 
-export const name = 'dsh-db-studio'
+export const name = 'dsh-agent-db-studio'
 
 /** 硬依赖：缺任何一个都不激活，避免半残状态（审批缺失时写工具会 fail closed）。 */
 export const inject = ['webServer', 'tools', 'connection', 'approval']
@@ -46,7 +46,7 @@ export async function createRuntime(ctx, config = {}, overrides = {}) {
 
   // 引擎生命周期绑在插件 fiber 上：卸载/热重载时按「外部连接池 → Redis 池 → SQLite」
   // 顺序关闭，不留孤儿句柄（V3 组装即就绪，无子进程概念）。
-  ctx.effect(() => () => supervisor.dispose(), 'dsh-db-studio: backend engine')
+  ctx.effect(() => () => supervisor.dispose(), 'dsh-agent-db-studio: backend engine')
 
   registerBrowserRoute(ctx, { settings, supervisor, backend, name })
   registerTools(ctx, { settings, supervisor, backend })
@@ -60,13 +60,13 @@ export async function createRuntime(ctx, config = {}, overrides = {}) {
   if (systemPrompt) {
     ctx.effect(() => {
       systemPrompt.section({ ...NL2SQL_PROMPT_SECTION, text: NL2SQL_PROMPT_TEXT })
-    }, 'dsh-db-studio: nl2sql prompt section')
+    }, 'dsh-agent-db-studio: nl2sql prompt section')
   }
 
   // 语义层 AI 蒸馏定时巡检（默认关闭）：只产 status='ready' 的 run 记录供人在面板勾选，
   // **绝不自动写文件**，也不影响主流程——失败只打日志。
   if (settings.semanticDistillHours > 0) {
-    ctx.effect(() => startDistillTimer({ ctx, backend, settings }), 'dsh-db-studio: semantic distill timer')
+    ctx.effect(() => startDistillTimer({ ctx, backend, settings }), 'dsh-agent-db-studio: semantic distill timer')
   }
 
   return { settings, supervisor, backend }
@@ -79,7 +79,7 @@ const DISTILL_MIN_INTERVAL_MS = 60_000
 function distillLog(level, event, detail) {
   if (typeof console === 'undefined') return
   const suffix = detail === undefined ? '' : ` ${JSON.stringify(detail)}`
-  const line = `[dsh-db-studio] semantic distill ${level} ${event}${suffix}`
+  const line = `[dsh-agent-db-studio] semantic distill ${level} ${event}${suffix}`
   if (level === 'error' || level === 'warn') console.warn(line)
   else console.log(line)
 }

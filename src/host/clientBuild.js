@@ -61,11 +61,11 @@ export function ensureClientBundle(repoRoot, log = {}) {
     const bundlePath = join(repoRoot, BUNDLE_REL)
     mkdirSync(dirname(bundlePath), { recursive: true })
     writeFileSync(bundlePath, output, 'utf8')
-    info('[dsh-db-studio] client bundle 已重建（' + reason + '，' + names.length + ' parts）')
+    info('[dsh-agent-db-studio] client bundle 已重建（' + reason + '，' + names.length + ' parts）')
     return { built: true, reason }
   } catch (error) {
     const message = error && error.message ? error.message : String(error)
-    warn('[dsh-db-studio] client bundle 构建失败：' + message)
+    warn('[dsh-agent-db-studio] client bundle 构建失败：' + message)
     return { built: false, error: message }
   }
 }
