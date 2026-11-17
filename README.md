@@ -125,8 +125,11 @@ V3 起数据库引擎**收编进 Host 进程**（Node 实现，`node:sqlite` 做
 # 本地安装：在仓库的上级目录执行，或改为绝对路径
 dsh plugin --profile desktop add ./dsh-db-studio
 
-# 或从 git 仓库安装（也可用 npm 包名）
-dsh plugin --profile desktop add git+https://github.com/<用户>/dsh-db-studio.git
+# 或从 git 仓库安装
+dsh plugin --profile desktop add git+https://github.com/junrui-li/dsh-db-studio.git
+
+# 或直接按 npm 包名安装
+dsh plugin --profile desktop add dsh-agent-db-studio
 ```
 
 首次使用会自动初始化 profile；本包声明了 `dsh.bundle`，会被自动追加进 `dsh.profile.bundles` 并启用。也可以在 DSH 会话里让 agent 调 `plugin_manager(action="install_bundle", target="<仓库绝对路径或安装规格>")` 安装（同一套 pnpm 实现，需放行 full-access 审批）。
@@ -135,7 +138,7 @@ dsh plugin --profile desktop add git+https://github.com/<用户>/dsh-db-studio.g
 
 ```yaml
 allowBuilds:
-  dsh-db-studio: true
+  dsh-agent-db-studio: true
 ```
 
 `prepare` 只是把 `src/client/parts/*.js` 拼成 `dist/client/index.js`；本地路径安装（`./dsh-db-studio`）不依赖它，插件激活时会自动按需重建，忘了 build 也不会静默跑旧代码。

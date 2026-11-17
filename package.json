@@ -1,5 +1,5 @@
 {
-  "name": "dsh-db-studio",
+  "name": "dsh-agent-db-studio",
   "version": "0.1.0",
   "description": "DeepSeek Harness 插件：agent 用工具接管数据库管理，人在 Web UI 面板里看得见、管得住。",
   "type": "module",
@@ -38,8 +38,23 @@
     "build:client": "node scripts/build-client.mjs",
     "prepare": "node scripts/build-client.mjs"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junrui-li/dsh-db-studio.git"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "database",
+    "mysql",
+    "redis",
+    "agent",
+    "data-masking",
+    "nl2sql"
+  ],
   "license": "MIT",
   "engines": {
-    "node": ">=24"
+    "node": ">=24",
+    "dsh": ">=0.2.0 <0.3.0"
   }
 }
