@@ -1,0 +1,45 @@
+{
+  "name": "dsh-db-studio",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness 插件：agent 用工具接管数据库管理，人在 Web UI 面板里看得见、管得住。",
+  "type": "module",
+  "main": "src/host.js",
+  "exports": {
+    ".": "./src/host.js",
+    "./client": "./dist/client/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "src",
+    "dist",
+    "scripts",
+    "locale",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
+    }
+  },
+  "scripts": {
+    "build:client": "node scripts/build-client.mjs",
+    "prepare": "node scripts/build-client.mjs"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  }
+}

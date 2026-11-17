@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "数据管理",
+    "description": "把 db-studio 接进 DeepSeek Harness：agent 可查连元数据、跑 SQL、按审批改数据，人在 Web UI 面板里看得见。"
+  }
+}

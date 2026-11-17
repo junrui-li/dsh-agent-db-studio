@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Data studio",
+    "description": "Brings db-studio into DeepSeek Harness: the agent inspects schemas, runs SQL, and changes data behind approval, all visible in a Web UI panel."
+  }
+}

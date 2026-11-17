@@ -1,0 +1,30 @@
+# 依赖与构建产物
+node_modules/
+# V3：Host 内置实现的 vendor 依赖（mysql2/ioredis 及其传递依赖，见 src/host/node_modules/README.md）
+!src/host/node_modules/
+# client 运行时单文件（由 src/client/parts/*.js 生成，不入库：仓库里只保留源码一份）
+dist/
+src/client/index.js
+.tmpbuild/
+.tmpcheck/
+*.log
+
+# 连接配置里有明文密码，绝不入库
+server/data/
+**/connections.json
+**/history.json
+# SQLite 数据库与迁移备份同样含明文密码，绝不入库
+**/*.db
+**/*.db-wal
+**/*.db-shm
+**/*.json.migrated
+# 本地调试残留目录（dbs.db + undo 快照，可能含明文密码）
+dbs-debug*/
+# 旧 Python sidecar 的磁盘残留（V3 已删源码，防 pyc 误入库）
+__pycache__/
+*.pyc
+
+# V3 JS 行为测试的临时数据目录（跑完自清；句柄残留时容忍）
+.tmp-v3-tests/
+# 本地 AI 会话计划草稿，不入库
+.zcode/

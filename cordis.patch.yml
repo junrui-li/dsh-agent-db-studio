@@ -1,0 +1,26 @@
+# dsh-db-studio 的 bundle patch：同一个包同时提供 Host 半片与浏览器半片。
+# Host 半片在进程内运行 db-studio 引擎、把数据库能力注册成 agent 工具；
+# Client 半片在 Web UI 里提供「数据管理」主面板与侧栏入口。
+- insert:
+    - id: db-studio
+      name: 'dsh-db-studio'
+      config:
+        # V3：后端收编进 Host 进程（无 Python、无子进程、无端口占用）。
+        # 数据目录（dbs.db / semantic-index.db / undo / exports）。留空 = <仓库>/server/data
+        dataDir: ''
+        # 写能力总开关：false 时所有写工具（含"提交工单"）都不注册，模型工具表里只有只读能力。
+        # 打开后也分两种策略，见 writeMode。
+        allowWrites: true
+        # 写操作策略：
+        #   ticket（默认，对标阿里云 DMS 工单）—— db_execute 只创建工单（背景说明 + 预估影响行数），
+        #            必须在 Web UI 面板的「工单」里由人点「批准并执行」后才真正跑。
+        #   direct —— 退回 v1 行为：db_execute 先过一次 DSH 审批弹窗，再立即执行。
+        writeMode: ticket
+        # 单次查询默认返回行数上限。
+        maxRows: 500
+        # 查询超时（秒）。
+        timeout: 60
+        # 业务语义层（NL2SQL 资产）文档导入源目录；留空 = 关闭文档导入源（语义工具照常注册）。
+        semanticLayerPath: ''
+        # 语义资产单次返回正文的最大字符数。
+        semanticMaxChars: 8000
